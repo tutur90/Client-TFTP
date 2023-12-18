@@ -25,6 +25,13 @@ int main(int argc, char *argv[]) {
         print_address(addr);
     }
 
+    // Create a socket based on the address info
+    int sockfd = create_socket(result);
+
+    // Free memory allocated for address info
+    freeaddrinfo(result);
+    // Close Socket
+    close(sockfd);
 
     return EXIT_SUCCESS;
 }

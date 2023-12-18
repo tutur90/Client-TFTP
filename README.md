@@ -17,4 +17,12 @@ La fonction parse_arguments vérifie d'abord si le nombre d'arguments est soit 4
 En fin de compte, le programme principal affiche un message d'utilisation et renvoie EXIT_FAILURE si la fonction parse_arguments échoue, sinon, il peut continuer à utiliser les valeurs des variables host, filename, localfile, et port pour effectuer d'autres opérations, comme le transfert de fichiers via TFTP.
 
 Il est important de noter que le code assume que les utilisateurs fournissent les arguments corrects lors de l'exécution du programme et prend en charge la gestion de la mémoire pour les allocations dynamiques.
+## Question 2
+
+Cette section du code implémente une requête avec trois arguments,où le premier argument est l'adress du serveur. Si l'adress existe, le programme fournit l'adresse IP associée à cet argument. En revanche, s'il ne trouve pas d'adresse correspondante, il retourne un message indiquant que l'adresse est invalide.
+
+![Test du Programme](img/Question%202.png)
+
+## Question 3
+
 
