@@ -27,6 +27,10 @@ int main(int argc, char *argv[]) {
 
     int sockfd = create_socket(result);
 
+    if (sockfd == -1) {
+        exit(EXIT_FAILURE);
+    }
+
     // Free memory allocated for address info
     freeaddrinfo(result);
     // Close Socket
