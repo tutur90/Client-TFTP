@@ -29,4 +29,11 @@ Pour la réservation d’un socket de connexion vers le serveur. Notre approche 
 
 ## Question 4
 
+Par la suite, nous avons réservé un socket de connexion vers le serveur en utilisant les informations d'adresse obtenues par getaddrinfo. Ensuite, nous avons construit un paquet RRQ correctement formé, en veillant à respecter le format spécifié par le protocole TFTP. Ce paquet est ensuite envoyé au serveur à l'aide de la fonction sendto.
+
+![Test du Programme](img/Question%204b.png)
+
+Après l'envoi réussi du paquet RRQ, notre programme passe à l'étape de réception du fichier. Nous avons mis en œuvre la réception d'un paquet de données constitué d'un seul paquet (DAT) ainsi que son acquittement (ACK). Le contenu du fichier reçu est extrait et sauvegardé localement. Enfin, un accusé de réception (ACK) est envoyé au serveur.
+
+Ce processus, de la construction de la requête RRQ à la réception du fichier et l'envoi de l'accusé de réception, illustre un flux de travail complet dans le contexte d'une transaction TFTP. L'utilisation de threads peut être envisagée pour gérer simultanément l'envoi et la réception pour améliorer l'efficacité globale du programme.
 
