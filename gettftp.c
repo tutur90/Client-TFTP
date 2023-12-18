@@ -45,7 +45,7 @@ int main(int argc, char *argv[]) {
     request[1] = 0x01; // Opcode  RRQ
     strcpy(&request[2], filename);
     strcpy(&request[strlen(filename) + 2], "octet");
-    request[strlen(file) + 3 + strlen("octet") + 1] = 0x00; // Null byte to end the RRQ packet
+    request[strlen(filename) + 3 + strlen("octet") + 1] = 0x00; // Null byte to end the RRQ packet
 
     int request_len = strlen(filename) + 3 + strlen("octet");
     request[request_len] = 0x00;
