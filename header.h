@@ -5,6 +5,8 @@
 #include <stdio.h>
 #include <sys/socket.h>
 
+#define MAX_BUFFER_SIZE 1024
+
 
 int parse_arguments(int argc, char *argv[], char **host, char **filename, char** localfile, char **port);
 void print_address(struct addrinfo *addr);

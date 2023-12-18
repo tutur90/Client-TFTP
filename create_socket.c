@@ -1,28 +1,20 @@
 #include "header.h"
 
 
+// Function to create a socket using the information from the addrinfo structure
 int create_socket(struct addrinfo *result) {
     int sockfd = -1;
-    // Iterate through available address info results to create a socket
+
+    // Check if the addrinfo structure is not NULL
     if (result != NULL) {
-        // Create a socket based on the address info
+        // Create a socket using the information from the addrinfo structure
         sockfd = socket(result->ai_family, result->ai_socktype, result->ai_protocol);
 
-        if (sockfd == -1) {
-        perror("socket");
-        } else {
-
-        // If socket creation fails, set sockfd to 0 
-        sockfd = 0;
+        // Check if socket creation failed
+        if (sockfd < 0) {
+            perror("Failed to create socket\n");
         }
     }
 
-    // Check if socket creation failed
-    if (sockfd == -1) {
-        fprintf(stderr, "Failed to create socket\n");
-        return 3;
-    }
-
-    return sockfd;
+    return sockfd; 
 }
-
