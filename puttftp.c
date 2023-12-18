@@ -31,8 +31,6 @@ int main(int argc, char *argv[]) {
         exit(EXIT_FAILURE);
     }
 
-
-
     // Free memory allocated for address info
     freeaddrinfo(result);
     // Close Socket

@@ -3,7 +3,9 @@
 #include <string.h>
 #include <netdb.h>
 #include <stdio.h>
+#include <arpa/inet.h>
 #include <sys/socket.h>
+#include <sys/types.h>
 
 #define MAX_BUFFER_SIZE 1024
 

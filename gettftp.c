@@ -2,9 +2,9 @@
 
 
 int main(int argc, char *argv[]) {
-    char *host, *filename, *localfile, *port;
+    char *host, *filename, *local_file, *port;
     
-    if(parse_arguments(argc, argv, &host, &filename, &localfile, &port) == EXIT_FAILURE){
+    if(parse_arguments(argc, argv, &host, &filename, &local_file, &port) == EXIT_FAILURE){
         return EXIT_FAILURE;
     }
 
@@ -41,16 +41,13 @@ int main(int argc, char *argv[]) {
 
     memset(request, 0, MAX_BUFFER_SIZE);
 
-
-
-    request[0] = 0x00;
-
-
-    request[1] = 0x01;
+    request[0] = 0x00; // Opcode RRQ
+    request[1] = 0x01; // Opcode  RRQ
     strcpy(&request[2], filename);
-    request[strlen(filename) + 3] = 0x00;
-    strcpy(&request[strlen(filename) + 4], "octet");
-    int request_len = strlen(filename) + 5 + strlen("octet");
+    strcpy(&request[strlen(filename) + 2], "octet");
+    request[strlen(file) + 3 + strlen("octet") + 1] = 0x00; // Null byte to end the RRQ packet
+
+    int request_len = strlen(filename) + 3 + strlen("octet");
     request[request_len] = 0x00;
 
 
@@ -62,6 +59,40 @@ int main(int argc, char *argv[]) {
 
 
     printf("RRQ packet sent successfully.\n");
+
+    // Receive 
+    char buffer[MAX_BUFFER_SIZE];
+
+    ssize_t bytes_received;
+
+    // Réception du paquet de données
+    bytes_received = recvfrom(sockfd, buffer, MAX_BUFFER_SIZE, 0, NULL, NULL);
+    if (bytes_received == -1) {
+        perror("Error receiving data");
+        exit(EXIT_FAILURE);
+
+    }
+    
+    // Extrait le contenu du fichier
+    FILE *file = fopen(local_file, "wb");
+    if (file == NULL) {
+        perror("Error opening local file");
+        exit(EXIT_FAILURE);
+    }
+
+    fwrite(buffer + 4, 1, bytes_received - 4, file);
+    
+    fclose(file);
+
+    // Envoi de l'accusé de réception (ACK)
+    uint16_t block_number = ntohs(*(uint16_t *)(buffer + 2));
+    uint8_t ack_packet[4] = {0, 4, block_number / 256, block_number % 256};
+    if (sendto(sockfd, ack_packet, sizeof(ack_packet), 0, server_addr, addr_len) == -1) {
+        perror("Error sending ACK");
+            exit(EXIT_FAILURE);
+    }
+
+    printf("ACK recieved\n");
 
     // Free memory allocated for address info
     freeaddrinfo(result);
