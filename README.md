@@ -18,4 +18,11 @@ En fin de compte, le programme principal affiche un message d'utilisation et ren
 
 Il est important de noter que le code assume que les utilisateurs fournissent les arguments corrects lors de l'exécution du programme et prend en charge la gestion de la mémoire pour les allocations dynamiques.
 ## Question 2
-![Test du Programme](img/UtilisationTFTP.png)
+
+Cette section du code implémente une requête avec trois arguments,où le premier argument est l'adress du serveur. Si l'adress existe, le programme fournit l'adresse IP associée à cet argument. En revanche, s'il ne trouve pas d'adresse correspondante, il retourne un message indiquant que l'adresse est invalide.
+
+![Test du Programme](img/Question%202.png)
+
+## Question 3
+
+
