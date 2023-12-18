@@ -25,4 +25,8 @@ Cette section du code implémente une requête avec trois arguments,où le premi
 
 ## Question 3
 
+Pour la réservation d’un socket de connexion vers le serveur. Notre approche consiste à analyser et interpréter les arguments fournis en ligne de commande, tels que l'hôte, le nom du fichier distant, le nom du fichier local et le port. Cette tâche est réalisée par une fonction de parse des arguments. Ensuite, nous avons utilisé la fonction getaddrinfo pour obtenir des informations d'adresse en fonction des paramètres fournis. Ces informations incluent notamment la famille d'adresse (IPv4 ou IPv6) et le type de socket (flux dans notre cas). Après avoir obtenu ces informations, nous avons parcouru la liste des adresses résolues et les avons affichées à des fins de vérification. Par la suite, nous avons créé un socket en fonction des informations d'adresse obtenues à l'aide de la fonction create_socket. Enfin, nous avons libéré la mémoire allouée pour les informations d'adresse à l'aide de freeaddrinfo et fermé le socket. Ce processus constitue une étape cruciale dans la mise en place d'une connexion avec le serveur, préparant ainsi le terrain pour des échanges de données ultérieurs.
+
+## Question 4
+
 
